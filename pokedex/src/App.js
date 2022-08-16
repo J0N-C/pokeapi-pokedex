@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import SearchBar from './components/searchBar';
 
 function App() {
   const [pokemonData, setPokemonData] = useState(null);
@@ -17,10 +18,12 @@ function App() {
     }
   }
 
+
   return (
     <div className="App">
       <h1>BLANK</h1>
       <p></p>
+      <SearchBar />
     </div>
   );
 }
