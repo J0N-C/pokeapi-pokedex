@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
 
-function SearchBar() {
+function SearchBar(props) {
   const [searchItem, setSearchItem] = useState('');
 
-  function handleChange(e) {
-    const {name, value} = e.target;
+  const handleChange = e => {
     setSearchItem(e.target.value);
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log('search:', searchItem);
+    props.onSearch(searchItem);
+    setSearchItem('');
   }
 
   return (
@@ -13,7 +19,7 @@ function SearchBar() {
       <form>
         <label htmlFor="name">Search for Pokemon:</label>
         <input name="pokemon" type="text" onChange={handleChange} value={searchItem}></input>
-        <button type="submit">SEARCH</button>
+        <button type="submit" onClick={handleSubmit}>SEARCH</button>
       </form>
     </div>
   );
