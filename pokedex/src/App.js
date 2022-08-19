@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import SearchBar from './components/searchBar';
+import DisplayPokemon from './components/display-pokemon';
 
 function App() {
   const [pokemonData, setPokemonData] = useState(null);
@@ -29,17 +30,12 @@ function App() {
       .catch(err => console.log(err));
   }
 
-  if (!isLoading) {
-    if (pokemonData) {
-      console.log(pokemonData, pokemonData.name, pokemonData.id);
-    }
-  }
-
   return (
     <div className="App">
       <h1>POKEDEX SEARCH</h1>
       <p className="error-msg">{errorMsg}</p>
       <SearchBar onSearch={fetchPokemon} />
+      <DisplayPokemon pokemonInfo={pokemonData} />
     </div>
   );
 }

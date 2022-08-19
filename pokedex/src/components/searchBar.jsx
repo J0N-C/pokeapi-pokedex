@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function SearchBar(props) {
   const [searchItem, setSearchItem] = useState('');
