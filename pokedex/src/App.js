@@ -7,20 +7,15 @@ function App() {
   const [isLoading, setLoad] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  /* useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon/1/')
-      .then(res => res.json())
-      .then(pokemon => setPokemonData(pokemon))
-      .then(setLoad(false));
-  }, []); */
 
   const fetchPokemon = name => {
     const query = `https://pokeapi.co/api/v2/pokemon/${name}/`
     setLoad(true);
+    setErrorMsg('');
     fetch(query)
       .then(res => {
         if (res.status === 404) {
-          return setErrorMsg('Invalid search name!');
+          return setErrorMsg(`'${name}' is an invalid search name!`);
         } else {
           return res.json();
         }
