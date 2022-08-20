@@ -1,3 +1,3 @@
 # pokeapi-pokedex
 
-A project utilizing react hooks, async...await, and styled components.
+An app to search for pokemon by name or id number, utilizing react hooks, async...await, and styled components.
