@@ -1,3 +1,3 @@
 # pokeapi-pokedex
 
-Test temp file
+A project utilizing react hooks, async...await, and styled components.
