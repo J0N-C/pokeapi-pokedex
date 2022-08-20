@@ -1,14 +1,13 @@
 function DisplayPokemon (props) {
-
-  console.log('display passed', props.pokemonInfo)
   if (props.pokemonInfo) {
+    const {id, name, height, weight, sprites} = props.pokemonInfo;
     return (
       <div id="display-pokemon">
-        <img src={props.pokemonInfo.sprites.front_default} alt={props.pokemonInfo.name}></img>
-        <p>ID Number: {props.pokemonInfo.id}</p>
-        <p>Name: {props.pokemonInfo.name}</p>
-        <p>Height: {props.pokemonInfo.height}</p>
-        <p>Weight: {props.pokemonInfo.weight}</p>
+        <img src={sprites.front_default} alt={props.pokemonInfo.name}></img>
+        <p>ID Number: {id}</p>
+        <p>Name: {name}</p>
+        <p>Height: {height}</p>
+        <p>Weight: {weight}</p>
       </div>
     )
   }
