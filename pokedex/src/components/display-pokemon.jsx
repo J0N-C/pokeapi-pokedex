@@ -1,5 +1,8 @@
 function DisplayPokemon (props) {
   if (props.pokemonInfo) {
+    if (props.pokemonInfo.length > 1) {
+      return console.log(props.pokemonInfo);
+    }
     const {id, name, height, weight, sprites} = props.pokemonInfo;
     return (
       <div id="display-pokemon">
