@@ -7,32 +7,31 @@ function App() {
   const [isLoading, setLoad] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  /* useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon/1/')
-      .then(res => res.json())
-      .then(pokemon => setPokemonData(pokemon))
-      .then(setLoad(false));
-  }, []); */
-
-  const fetchPokemon = name => {
+  const fetchPokemon = async (name) => {
     const query = `https://pokeapi.co/api/v2/pokemon/${name}/`
-    setLoad(true);
-    fetch(query)
-      .then(res => {
-        if (res.status === 404) {
-          return setErrorMsg('Invalid search name!');
-        } else {
-          return res.json();
-        }
-      })
-      .then(pokemon => setPokemonData(pokemon))
-      .then(setLoad(false))
-      .catch(err => console.log(err));
+    setLoad('fetching data...');
+    setErrorMsg('');
+    try {
+      const pokemonResponse = await fetch(query);
+      setLoad(false);
+      if (pokemonResponse.status === 404) return setErrorMsg(`'${name}' is an invalid search name!`);
+      return setPokemonData(await pokemonResponse.json());
+    } catch(err) {
+      console.log('error', err);
+    }
   }
+
+  const loadMsg = () => {
+    if (isLoading) {
+      return <p>{'Fetching pokemon data...'}</p>
+    } else return;
+  }
+
 
   return (
     <div className="App">
       <h1>POKEDEX SEARCH</h1>
+      {loadMsg()}
       <p className="error-msg">{errorMsg}</p>
       <SearchBar onSearch={fetchPokemon} />
       <DisplayPokemon pokemonInfo={pokemonData} />
