@@ -1,19 +1,34 @@
 function DisplayPokemon (props) {
+  console.log(props);
   if (props.pokemonInfo) {
-    if (props.pokemonInfo.length > 1) {
-      return console.log(props.pokemonInfo);
+    if (!props.isDataList) {
+      return parseData(props.pokemonInfo);
+    } else {
+      const pokemonList = props.pokemonInfo.map(pokemon =>
+        <li key={pokemon.id}>
+          {parseData(pokemon)}
+        </li>
+        );
+      return (
+        <ul>
+          {pokemonList}
+        </ul>
+      )
     }
-    const {id, name, height, weight, sprites} = props.pokemonInfo;
-    return (
-      <div id="display-pokemon">
-        <img src={sprites.front_default} alt={props.pokemonInfo.name}></img>
-        <p>ID Number: {id}</p>
-        <p>Name: {name}</p>
-        <p>Height: {height}</p>
-        <p>Weight: {weight}</p>
-      </div>
-    )
   }
+}
+
+const parseData = (pokemon) => {
+  const { id, name, height, weight, sprites } = pokemon;
+  return (
+    <div id="display-pokemon">
+      <img src={sprites.front_default} alt={name}></img>
+      <p>ID Number: {id}</p>
+      <p>Name: {name}</p>
+      <p>Height: {height}</p>
+      <p>Weight: {weight}</p>
+    </div>
+  )
 }
 
 export default DisplayPokemon

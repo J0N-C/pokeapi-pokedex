@@ -5,7 +5,7 @@ import checkGeneration from './components/checkGeneration';
 
 function App() {
   const [pokemonData, setPokemonData] = useState(null);
-  const [dataType, setDataType] = useState('')
+  const [isList, setIsList] = useState(null)
   const [loadMsg, setLoadMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -14,11 +14,9 @@ function App() {
     if (param === 'name') {
       if (!name) return setErrorMsg('Please enter a valid name or id number!')
       query += `pokemon/${name}/`
-      setDataType('single');
     } else if (param === 'type') {
       if (!name) return setErrorMsg('Please enter a valid type or type id!')
       query += `type/${name}/`
-      setDataType('array')
     }
     setLoadMsg('fetching pokemon data...');
     setErrorMsg('');
@@ -28,9 +26,18 @@ function App() {
       if (pokemonResponse.status === 404) return setErrorMsg(`'${name}' is an invalid search name!`);
       let result = await pokemonResponse.json()
       if (param === 'name') {
+        setIsList(false);
         return setPokemonData(result);
       } else if (param === 'type') {
-        return setPokemonData(checkGeneration(result.pokemon, 151));
+        const lookupList = checkGeneration(result.pokemon, 151);
+        const resList = lookupList.map(async pokemon => {
+          const res = await fetch(pokemon.pokemon.url);
+          const pokemonToBeAdded = await res.json()
+          return pokemonToBeAdded;
+        })
+        return Promise.all(resList).then(values => {
+          setIsList(true);
+          return setPokemonData(values)});
       }
     } catch (err) {
       console.log('error', err);
@@ -43,7 +50,7 @@ function App() {
       <p className="load-msg">{loadMsg}</p>
       <p className="error-msg">{errorMsg}</p>
       <SearchBar onSearch={fetchPokemon} />
-      <DisplayPokemon pokemonInfo={pokemonData} />
+      <DisplayPokemon pokemonInfo={pokemonData} isDataList={isList} />
     </div>
   );
 }
