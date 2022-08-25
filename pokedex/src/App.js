@@ -26,6 +26,9 @@ function App() {
       if (pokemonResponse.status === 404) return setErrorMsg(`'${name}' is an invalid search name!`);
       let result = await pokemonResponse.json()
       if (param === 'name') {
+        if (result.id > 151) {
+          return setErrorMsg(`#${result.id} ${result.name} is not a Gen 1 Pokemon!`)
+        }
         setIsList(false);
         return setPokemonData(result);
       } else if (param === 'type') {
@@ -37,6 +40,7 @@ function App() {
         })
         return Promise.all(resList).then(values => {
           setIsList(true);
+          if (values.length < 1) return setErrorMsg(`No Gen 1 pokemon of this type!`)
           return setPokemonData(values)});
       }
     } catch (err) {
