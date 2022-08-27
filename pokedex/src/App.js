@@ -2,6 +2,7 @@ import { useState } from 'react';
 import SearchBar from './components/searchBar';
 import DisplayPokemon from './components/display-pokemon';
 import checkGeneration from './components/checkGeneration';
+import GlobalStyle from "./components/createGlobalStyle";
 
 function App() {
   const [pokemonData, setPokemonData] = useState(null);
