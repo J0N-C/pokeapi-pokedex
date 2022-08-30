@@ -42,7 +42,6 @@ const PText = styled.p`
 
 function DisplayPokemon (props) {
   let pokemonList;
-  console.log(props);
   if (props.pokemonInfo) {
     if (!props.isDataList) {
       pokemonList = <ListItem>{infoCard(props.pokemonInfo)}</ListItem>
@@ -69,7 +68,6 @@ const infoCard = (pokemon) => {
   if (typeList.length === 1) {
     typeList.push(<PText>Type 2: None</PText>)
   }
-  console.log(typeList);
   return (
     <StyledInfoCard className="display-pokemon">
       <ImageContainer>
