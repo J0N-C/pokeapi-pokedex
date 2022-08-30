@@ -22,7 +22,7 @@ function SearchBar(props) {
   return (
     <div className="searchBar">
       <form>
-        <label htmlFor="name">Search for Pokemon:</label>
+        <label htmlFor="name">Search for Pokemon</label>
         <input name="pokemon" type="text" onChange={handleChange} value={searchItem}></input>
         <select name="search-params" onChange={changeSearchParam}>
           <option value="name">By Name or ID</option>
