@@ -24,10 +24,20 @@ const PokemonImage = styled.img`
 
 const ListItem = styled.li`
   width: 20%;
+
+  @media (max-width: 768px) {
+    width: calc(100%/3);
+  }
+
+  @media (max-width: 320px) {
+    width: 100%;
+  }
+
 `
 
 const ListContainer = styled.ul`
   width: 100%;
+  padding: 0;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
