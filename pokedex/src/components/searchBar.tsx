@@ -1,18 +1,18 @@
 import { useState } from 'react';
 
-function SearchBar(props) {
-  const [searchItem, setSearchItem] = useState('');
-  const [searchParam, setSearchParam] = useState('name');
+function SearchBar(props: any) {
+  const [searchItem, setSearchItem] = useState<string>('');
+  const [searchParam, setSearchParam] = useState<string>('name');
 
-  const handleChange = e => {
-    setSearchItem(e.target.value);
+  const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
+    setSearchItem(e.currentTarget.value);
   }
 
-  const changeSearchParam = e => {
-    setSearchParam(e.target.value);
+  const changeSearchParam = (e: React.FormEvent<HTMLSelectElement>): void => {
+    setSearchParam(e.currentTarget.value);
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     console.log();
     props.onSearch(searchItem, searchParam);

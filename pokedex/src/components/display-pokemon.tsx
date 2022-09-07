@@ -50,13 +50,23 @@ const PText = styled.p`
   border-radius: 6px;
 `
 
-function DisplayPokemon (props) {
+interface Pokemon {
+  id: number;
+  name: string;
+  sprites: any;
+  height: number;
+  weight: number;
+  types: any;
+}
+
+
+function DisplayPokemon (props: any) {
   let pokemonList;
   if (props.pokemonInfo) {
     if (!props.isDataList) {
       pokemonList = <ListItem>{infoCard(props.pokemonInfo)}</ListItem>
     } else {
-      pokemonList = props.pokemonInfo.map(pokemon =>
+      pokemonList = props.pokemonInfo.map((pokemon: Pokemon) =>
         <ListItem key={pokemon.id}>
           {infoCard(pokemon)}
         </ListItem>
@@ -70,9 +80,9 @@ function DisplayPokemon (props) {
   }
 }
 
-const infoCard = (pokemon) => {
+const infoCard = (pokemon: Pokemon) => {
   const { id, name, height, weight, sprites } = pokemon;
-  const typeList = pokemon.types.map((types, i) =>
+  const typeList = pokemon.types.map((types: any, i: number) =>
     <PText key={types.slot}>{`Type ${types.slot}: ${types.type.name[0].toUpperCase() + types.type.name.slice(1)}`}</PText>
   );
   if (typeList.length === 1) {
