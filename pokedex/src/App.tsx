@@ -5,8 +5,7 @@ import checkGeneration from './components/checkGeneration';
 import {Pokemon} from "./types";
 
 function App() {
-  const [pokemonData, setPokemonData] = useState<Pokemon[]>();
-  const [isList, setIsList] = useState(false)
+  const [pokemonData, setPokemonData] = useState<Pokemon | Pokemon[]>();
   const [loadMsg, setLoadMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -30,7 +29,6 @@ function App() {
         if (result.id > 151) {
           return setErrorMsg(`#${result.id} ${result.name} is not a Gen 1 Pokemon!`)
         }
-        setIsList(false);
         return setPokemonData(result);
       } else if (param === 'type') {
         const lookupList = checkGeneration(result.pokemon, 151);
@@ -41,7 +39,6 @@ function App() {
           return pokemonToBeAdded;
         })
         return Promise.all(resList).then(values => {
-          setIsList(true);
           if (values.length < 1) return setErrorMsg(`No Gen 1 pokemon of this type!`)
           return setPokemonData(values)});
       }
@@ -56,7 +53,7 @@ function App() {
       <p className="load-msg">{loadMsg}</p>
       <p className="error-msg">{errorMsg}</p>
       <SearchBar onSearch={fetchPokemon} />
-      <DisplayPokemon pokemonInfo={pokemonData} isDataList={isList} />
+      <DisplayPokemon pokemonInfo={pokemonData} />
     </div>
   );
 }

@@ -51,13 +51,16 @@ const PText = styled.p`
   border-radius: 6px;
 `
 
-function DisplayPokemon (props: any) {
+interface DisplayPokemonProps {
+    pokemonInfo?: Pokemon | Pokemon[]
+}
+function DisplayPokemon ({pokemonInfo }: DisplayPokemonProps) {
   let pokemonList;
-  if (props.pokemonInfo) {
-    if (!props.isDataList) {
-      pokemonList = <ListItem>{infoCard(props.pokemonInfo)}</ListItem>
+  if (pokemonInfo) {
+    if (!Array.isArray(pokemonInfo)) {
+      pokemonList = <ListItem>{infoCard(pokemonInfo)}</ListItem>
     } else {
-      pokemonList = props.pokemonInfo.map((pokemon: Pokemon) =>
+      pokemonList = pokemonInfo.map((pokemon: Pokemon) =>
         <ListItem key={pokemon.id}>
           {infoCard(pokemon)}
         </ListItem>
