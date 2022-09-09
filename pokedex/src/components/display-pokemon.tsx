@@ -72,12 +72,12 @@ function DisplayPokemon (props: any) {
         </ListItem>
         );
     }
-    return (
-      <ListContainer>
-        {pokemonList}
-      </ListContainer>
-    )
   }
+  return (
+    <ListContainer>
+      {pokemonList}
+    </ListContainer>
+  )
 }
 
 const infoCard = (pokemon: Pokemon) => {
@@ -102,4 +102,4 @@ const infoCard = (pokemon: Pokemon) => {
   )
 }
 
-export default DisplayPokemon
+export default DisplayPokemon;
