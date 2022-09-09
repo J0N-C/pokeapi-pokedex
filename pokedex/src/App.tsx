@@ -2,9 +2,10 @@ import { useState } from 'react';
 import SearchBar from './components/searchBar';
 import DisplayPokemon from './components/display-pokemon';
 import checkGeneration from './components/checkGeneration';
+import {Pokemon} from "./types";
 
 function App() {
-  const [pokemonData, setPokemonData] = useState<any | null>(null);
+  const [pokemonData, setPokemonData] = useState<Pokemon[]>();
   const [isList, setIsList] = useState(false)
   const [loadMsg, setLoadMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');

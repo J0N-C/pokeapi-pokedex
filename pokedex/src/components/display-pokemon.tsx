@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Pokemon} from "../types";
 
 const StyledInfoCard = styled.div`
   max-width: 100%;
@@ -49,16 +50,6 @@ const PText = styled.p`
   background-color: white;
   border-radius: 6px;
 `
-
-interface Pokemon {
-  id: number;
-  name: string;
-  sprites: any;
-  height: number;
-  weight: number;
-  types: any;
-}
-
 
 function DisplayPokemon (props: any) {
   let pokemonList;
