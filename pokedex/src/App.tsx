@@ -4,12 +4,12 @@ import DisplayPokemon from './components/display-pokemon';
 import checkGeneration from './components/checkGeneration';
 
 function App() {
-  const [pokemonData, setPokemonData] = useState(null);
-  const [isList, setIsList] = useState(null)
+  const [pokemonData, setPokemonData] = useState<any | null>(null);
+  const [isList, setIsList] = useState(false)
   const [loadMsg, setLoadMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const fetchPokemon = async (name, param) => {
+  const fetchPokemon = async (name: string, param: string) => {
     let query = 'https://pokeapi.co/api/v2/'
     if (param === 'name') {
       if (!name) return setErrorMsg('Please enter a valid name or id number!')
@@ -33,7 +33,8 @@ function App() {
         return setPokemonData(result);
       } else if (param === 'type') {
         const lookupList = checkGeneration(result.pokemon, 151);
-        const resList = lookupList.map(async pokemon => {
+        console.log(lookupList);
+        const resList = lookupList.map(async (pokemon: any) => {
           const res = await fetch(pokemon.pokemon.url);
           const pokemonToBeAdded = await res.json()
           return pokemonToBeAdded;
